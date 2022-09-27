@@ -33,7 +33,6 @@ static struct lab1_history * history;
 static ssize_t dev_read(struct file * filp, char __user * ubuf, size_t count, loff_t * off) {
     char * buf;
 
-    // TODO lock
     lab1_history_print(history, &buf);
     printk(KERN_INFO "lab1:\n%s", buf);
 
@@ -42,7 +41,6 @@ static ssize_t dev_read(struct file * filp, char __user * ubuf, size_t count, lo
 }
 
 static ssize_t dev_write(struct file * filp, const char __user * ubuf, size_t len, loff_t * off) {
-    // TODO lock
     history = lab1_history_new(len, history);
 
     return len;
@@ -56,7 +54,6 @@ static ssize_t proc_read(struct file * filp, char __user * ubuf, size_t count, l
         return 0;
     }
 
-    // TODO lock
     len = lab1_history_print(history, &buf);
     if (count < len) {
         len = count;

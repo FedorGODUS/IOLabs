@@ -144,7 +144,6 @@ ssize_t proc_read(struct file * filp, char __user * ubuf, size_t count, loff_t *
         return 0;
     }
 
-    // TODO lock
     len = lab3_history_print(history, &buf);
     if (count < len) {
         len = count;
